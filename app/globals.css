@@ -17,3 +17,36 @@ a { color:inherit; text-decoration:none; }
 .image-card:nth-child(3) { background-image:linear-gradient(180deg,transparent 25%,rgba(8,28,42,.66)),url('https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=1100&q=80'); }
 .grid-faint { background-image:linear-gradient(#e7eef0 1px,transparent 1px),linear-gradient(90deg,#e7eef0 1px,transparent 1px); background-size:40px 40px; }
 input, textarea, select { width:100%; border:1px solid var(--line); background:white; border-radius:8px; padding:12px; color:var(--ink); outline:none; } input:focus,textarea:focus,select:focus { border-color:var(--aqua); box-shadow:0 0 0 3px #36b9c822; }
+
+/* Independent image layer keeps parallax away from readable content. */
+.glass-image { position:relative; isolation:isolate; overflow:hidden; background:none; }
+.glass-image::before { content:""; position:absolute; inset:-80px 0; z-index:-1; background:linear-gradient(135deg,rgba(10,40,58,.55),rgba(10,40,58,.2)),url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80') center/cover; transform:translate3d(0,var(--parallax-y,0px),0); }
+.btn { transition:background-color .25s ease,color .25s ease,box-shadow .25s ease,transform .25s ease; }
+.btn svg, .image-card > div { transition:transform .35s ease; }
+header nav a { position:relative; }
+header nav a::after { content:""; position:absolute; bottom:-7px; left:0; right:0; height:2px; background:var(--aqua); transform:scaleX(0); transform-origin:left; transition:transform .25s ease; }
+header nav a:hover::after, header nav a:focus-visible::after { transform:scaleX(1); }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline:3px solid var(--aqua); outline-offset:5px; }
+input, textarea, select { transition:border-color .2s ease,box-shadow .2s ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .glass-image h1 { animation:glass-arrive .9s cubic-bezier(.2,.7,.2,1) both; }
+  .glass-image h1 + p { animation:glass-arrive .9s .12s cubic-bezier(.2,.7,.2,1) both; }
+  .glass-image h1 + p + div { animation:glass-arrive .9s .24s cubic-bezier(.2,.7,.2,1) both; }
+  .motion-reveal { opacity:0; translate:0 24px; transition:opacity .7s ease,translate .7s cubic-bezier(.2,.7,.2,1); }
+  .motion-reveal.motion-visible, .motion-reveal:focus-within { opacity:1; translate:0 0; }
+  details[open] > p { animation:glass-arrive .3s ease both; }
+  @media (hover:hover) {
+    .image-card { transition:transform .4s ease,box-shadow .4s ease; }
+    .image-card:hover { transform:translateY(-5px); box-shadow:0 18px 35px #102d4524; }
+    .image-card:hover > div { transform:translateY(-5px); }
+    .btn:hover svg { transform:translate(3px,-2px); }
+    .btn:hover { box-shadow:0 8px 20px #102d4520; }
+  }
+}
+@keyframes glass-arrive { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  *, *::before, *::after { animation:none !important; transition:none !important; }
+  .glass-image::before, .btn:hover { transform:none; }
+  .motion-reveal { opacity:1; translate:none; }
+}
