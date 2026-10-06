@@ -18,7 +18,7 @@ a { color:inherit; text-decoration:none; }
 .image-card:nth-child(3) { background-image:linear-gradient(180deg,transparent 25%,rgba(8,28,42,.66)),url('https://images.unsplash.com/photo-1615874694520-474822394e73?auto=format&fit=crop&w=1100&q=80'); }
 .grid-faint { background-image:linear-gradient(#e7eef0 1px,transparent 1px),linear-gradient(90deg,#e7eef0 1px,transparent 1px); background-size:40px 40px; }
 .folding-glass-section { background:linear-gradient(180deg,#fff 0%,#f5fafb 100%); }
-.folding-glass-image { background:linear-gradient(180deg,transparent 35%,rgba(8,28,42,.35)),url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85') center/cover; }
+.folding-glass-image { background:linear-gradient(180deg,transparent 35%,rgba(8,28,42,.35)),url('/images/cortinas-plegables-hero.png') center/cover; }
 input, textarea, select { width:100%; border:1px solid var(--line); background:white; border-radius:8px; padding:12px; color:var(--ink); outline:none; } input:focus,textarea:focus,select:focus { border-color:var(--aqua); box-shadow:0 0 0 3px #36b9c822; }
 
 /* Independent image layer keeps parallax away from readable content. */
